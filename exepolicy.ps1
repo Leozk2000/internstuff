@@ -1,1 +1,1 @@
-powershell -ExecutionPolicy Bypass -File securitytest.ps1
+powershell -ExecutionPolicy Bypass -File backup.ps1
