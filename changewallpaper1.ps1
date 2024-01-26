@@ -1,5 +1,5 @@
 # Set the URL to your desired image
-$imageUrl = "i.ibb.co/NpDrtk5/hackeranyaweb.jpg"
+$imageUrl = "https://raw.githubusercontent.com/Leozk2000/internstuff/main/hackeranyaweb.jpg"
 
 # Set the local path where you want to save the downloaded image
 $downloadPath = "C:\Temp\urlimage.jpg"
